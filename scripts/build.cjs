@@ -1,0 +1,12 @@
+const fs = require('node:fs');
+const path = require('node:path');
+const { spawnSync } = require('node:child_process');
+const root = path.resolve(__dirname, '..');
+const out = path.join(root, 'dist');
+fs.mkdirSync(out, { recursive: true });
+for (const name of ['core.js', 'overlay.js', 'options.js', 'ui.css']) fs.copyFileSync(path.join(root, 'extension', name), path.join(out, name));
+fs.copyFileSync(path.join(root, 'extension/options.html'), path.join(out, 'index.html'));
+fs.writeFileSync(path.join(out, '.nojekyll'), '');
+const zip = spawnSync(process.platform === 'win32' ? 'python' : 'python3', [path.join(root, 'scripts/package.py')], { cwd: root, stdio: 'inherit' });
+if (zip.status !== 0) process.exit(zip.status || 1);
+console.log('Built dist/ and dist/scroll-words-extension.zip');

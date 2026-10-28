@@ -1,0 +1,1 @@
+{"name":"scroll-words","version":"0.1.0","private":true,"description":"Local vocabulary breaks for Douyin and Xiaohongshu","scripts":{"test":"node --test","build":"node scripts/build.cjs","dev":"node scripts/serve.cjs"},"engines":{"node":">=22"},"license":"MIT"}

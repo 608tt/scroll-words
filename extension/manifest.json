@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "Scroll Words · 刷着记",
+  "description": "在抖音、小红书网页版刷内容时，定期停下来看看自选词库。Local vocabulary breaks for Douyin & Xiaohongshu.",
+  "version": "0.1.0",
+  "permissions": ["storage"],
+  "action": {"default_title": "Scroll Words · 词库与设置", "default_popup": "popup.html"},
+  "options_page": "options.html",
+  "background": {"service_worker": "background.js"},
+  "content_scripts": [{
+    "matches": ["https://www.douyin.com/*", "https://www.xiaohongshu.com/*"],
+    "js": ["core.js", "overlay.js", "content.js"],
+    "run_at": "document_idle"
+  }]
+}
